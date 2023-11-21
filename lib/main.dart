@@ -30,10 +30,17 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.light,
         ),
         useMaterial3: true,
-
       ),
-      home:  Authentication(title: 'Enter Your PIN'),
+      routes: {
+        '/': (context) => Authentication(title: 'Authentication'),
+        if (firstTime()) '/': (context) => Authentication(title: 'Enter New Pin'),
+        if (!firstTime()) '/': (context) => Authentication(title: 'Enter Your Pin'),
+        '/api': (context) => API(),
+      }
     );
   }
 }
 
+bool firstTime(){
+  return true;
+}
