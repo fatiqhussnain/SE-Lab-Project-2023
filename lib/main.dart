@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => Authentication(title: 'Authentication'),
         if (firstTime()) '/': (context) => Authentication(title: 'Enter New Pin'),
         if (!firstTime()) '/': (context) => Authentication(title: 'Enter Your Pin'),
-        '/api': (context) => API(),
+        '/homeNavigation': (context) => HomeNavigation(),
       }
     );
   }

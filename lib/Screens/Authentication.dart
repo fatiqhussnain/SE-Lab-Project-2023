@@ -271,6 +271,7 @@ class _AuthenticationState extends State<Authentication> {
                   ),
                   TextButton(
                     onPressed: (){
+                      Navigator.pushReplacementNamed(context, '/homeNavigation');
                       setState(() {
                         buttonPress(0);
                       });
