@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '/AppColors.dart';
 
 class HomeNavigation extends StatefulWidget {
   const HomeNavigation({super.key});
@@ -27,9 +28,14 @@ class _HomeNavigationState extends State<HomeNavigation> {
                 SizedBox(
                   height: height * 0.03,
                 ),
-                CircleAvatar(
-                  radius: height * 0.07,
-                  child: FlutterLogo(),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/profile');
+                  },
+                  child: CircleAvatar(
+                    radius: height * 0.07,
+                    child: FlutterLogo(),
+                  ),
                 ),
                 Text(
                   'User Name',
@@ -45,7 +51,7 @@ class _HomeNavigationState extends State<HomeNavigation> {
                 ListTile(
                   title: const Text('Currency Conversions'),
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/currencyConversion');
                   },
                 ),
                 // add a line break
@@ -58,23 +64,25 @@ class _HomeNavigationState extends State<HomeNavigation> {
                 ListTile(
                   title: const Text('Setting'),
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/setting');
                   },
                 ),
               ],
             ),
           ),
           appBar: AppBar(
-            title: const Row(
-              children: [
-                Text('Home Navigation'),
-              ],
-            ),
+            iconTheme: const IconThemeData(color: Colors.white),
+            backgroundColor: themeColor,
+            toolbarHeight: height * 0.08,
+            elevation: 9,
+            title: Text('CASHFLO', style: TextStyle(color: Colors.white),),
             bottom: const TabBar(
+              unselectedLabelColor: Colors.white54,
+              labelColor: Colors.white,
               tabs: [
-                Tab(text: 'Home'),
-                Tab(text: 'Settings'),
-                Tab(text: 'Profile'),
+                Tab(text: 'Income', height: 28,),
+                Tab(text: 'Home', height: 28,),
+                Tab(text: 'Expense', height: 28),
               ],
             ),
           ),

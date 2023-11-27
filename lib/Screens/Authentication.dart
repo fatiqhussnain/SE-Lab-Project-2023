@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import '/AppColors.dart';
 import 'package:flutter/material.dart';
 
 var lst = [
@@ -61,7 +62,7 @@ class _AuthenticationState extends State<Authentication> {
   Widget build(BuildContext context) {
     return  Scaffold(
       body: Container(
-        color: Theme.of(context).colorScheme.primary,
+        color: themeColor,
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: Column(
