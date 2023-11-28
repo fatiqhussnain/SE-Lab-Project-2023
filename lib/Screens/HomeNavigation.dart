@@ -1,3 +1,6 @@
+import 'package:finance_tracker/Screens/Expense.dart';
+import 'package:finance_tracker/Screens/Home.dart';
+import 'package:finance_tracker/Screens/Income.dart';
 import 'package:flutter/material.dart';
 import '/AppColors.dart';
 
@@ -88,9 +91,9 @@ class _HomeNavigationState extends State<HomeNavigation> {
           ),
           body: const TabBarView(
             children: [
-              Center(child: Text('Home')),
-              Center(child: Text('Settings')),
-              Center(child: Text('Profile')),
+              Center(child: Income()),
+              Center(child: Home()),
+              Center(child: Expense()),
             ],
           ),
         ),
