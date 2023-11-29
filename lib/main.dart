@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'Screens/Screens.dart';
+import 'package:finance_tracker/CRUD/SqlHelper.dart';
 
 void main() {
+  sqfliteFfiInit();
+  // Set the ffi database factory before opening the database
+  databaseFactory = databaseFactoryFfi;
   runApp(MyApp());
 }
 

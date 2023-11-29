@@ -2,6 +2,7 @@ import 'package:finance_tracker/Screens/Expense.dart';
 import 'package:finance_tracker/Screens/Home.dart';
 import 'package:finance_tracker/Screens/Income.dart';
 import 'package:flutter/material.dart';
+import 'package:finance_tracker/CRUD/SqlHelper.dart';
 import '/AppColors.dart';
 
 class HomeNavigation extends StatefulWidget {
@@ -13,6 +14,13 @@ class HomeNavigation extends StatefulWidget {
 
 
 class _HomeNavigationState extends State<HomeNavigation> {
+
+  @override
+  void initState() {
+    super.initState();
+    SqlHelper.deleteMyDatabase();
+    SqlHelper.db();
+  }
 
   @override
   Widget build(BuildContext context) {
