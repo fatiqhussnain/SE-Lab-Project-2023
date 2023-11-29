@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 
-const Color themeColor = Colors.teal;//Color(0xFF29C49E);
+const Color themeColor = Colors.teal;
+
+
 const Color secondaryColor = Color(0xFF2E2E2E);
 const Color tertiaryColor = Color(0xFF3E3E3E);
 const Color quaternaryColor = Color(0xFF4E4E4E);
