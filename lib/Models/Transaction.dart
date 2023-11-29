@@ -1,4 +1,4 @@
-class Transaction{
+class TransactionBL{
   int? id;
   int direction;
   String label;
@@ -9,7 +9,7 @@ class Transaction{
   String? updatedAt;
   int active;
 
-  Transaction({
+  TransactionBL({
     this.id,
     required this.direction,
     required this.label,
@@ -21,7 +21,7 @@ class Transaction{
     required this.active
   });
 
-  factory Transaction.fromJson(Map<String, dynamic> json) => Transaction(
+  factory TransactionBL.fromJson(Map<String, dynamic> json) => TransactionBL(
     id: json["id"],
     direction: json["direction"],
     label: json["label"],
@@ -43,4 +43,9 @@ class Transaction{
     "updatedAt": updatedAt,
     "active": active
   };
+
+  @override
+  String toString() {
+    return "TransactionBL(id: $id, direction: $direction, label: $label, description: $description, amount: $amount, type: $type, createdAt: $createdAt, updatedAt: $updatedAt, active: $active)";
+  }
 }

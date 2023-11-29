@@ -1,5 +1,7 @@
+import 'package:finance_tracker/CRUD/CRUD.dart';
 import 'package:flutter/material.dart';
 import '../AppColors.dart';
+import '../Models/Transaction.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -64,7 +66,23 @@ class _HomeState extends State<Home> {
                       color: Colors.black87
                     ),
                 ),
-              )
+              ),
+              ElevatedButton(
+                  onPressed: () async {
+                    // var transaction = TransactionBL(
+                    //   amount: 1000,
+                    //   label: "Food",
+                    //   description: "Biryani",
+                    //   type: "Expense",
+                    //   direction: 1,
+                    //   createdAt: DateTime.now().toString(),
+                    //   active: 1,
+                    // );
+                    // TransactionCRUD.addTransaction(transaction);
+                    print(await TransactionCRUD.getTransactions());
+                  },
+                  child: Text('Add Transaction',style: TextStyle(color: themeColor),)
+              ),
             ]
           ),
         ),

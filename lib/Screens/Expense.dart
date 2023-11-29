@@ -15,8 +15,12 @@ class _ExpenseState extends State<Expense> {
   TextEditingController c2 = TextEditingController();
   TextEditingController c3 = TextEditingController();
 
-  final List<String> items = ['Expense', 'Lending'];
-  String selectedValue = 'Expense';
+  final List<String> items = ['Select Type','Expense', 'Lending'];
+  String selectedValue = 'Select Type';
+
+
+  final List<String> categories = ['Select Category','Food', 'Education', 'Transportation', 'Entertainment', 'Health', 'Others'];
+  String selectedCategory = 'Select Category';
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +32,7 @@ class _ExpenseState extends State<Expense> {
             MaterialTextField(
               isPassword: false,
               controller: c1,
-              labelText: "Source",
+              labelText: "Label",
               marginTop: 10,
               marginBottom: 10,
               width: 500,
@@ -44,6 +48,47 @@ class _ExpenseState extends State<Expense> {
               isReadOnly: false,
               isMultiline: true,
             ),
+            Container(
+              margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+                border: Border.all(
+                  color: Colors.black87,
+                  width: 1,
+                ),
+              ),
+
+              child: DropdownButton<String>(
+                underline: const SizedBox(),
+                itemHeight: 50,
+                borderRadius: BorderRadius.circular(20),
+                isExpanded: true,
+                value: selectedCategory,
+                onChanged: (String? newValue) {
+                  // Handle when an item is selected
+                  // Typically, you would use setState to update the UI
+                  setState(() {
+                    selectedCategory = newValue!;
+                  });
+                },
+                items: categories.map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                      child: Text(
+                          value,
+                          style: const TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.normal
+                          )
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+
             MaterialTextField(
               isPassword: false,
               controller: c2,
@@ -54,6 +99,8 @@ class _ExpenseState extends State<Expense> {
               isReadOnly: false,
               isMultiline: false,
             ),
+
+
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6),
@@ -83,9 +130,9 @@ class _ExpenseState extends State<Expense> {
                       padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
                       child: Text(
                           value,
-                        style: const TextStyle(
-                            fontSize: 15,
-                          fontWeight: FontWeight.normal
+                          style: const TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.normal
                           )
                       ),
                     ),
@@ -93,9 +140,12 @@ class _ExpenseState extends State<Expense> {
                 }).toList(),
               ),
             ),
+
             const SizedBox(
               height: 25,
             ),
+
+
             ElevatedButton(
               onPressed: (){},
               style: ElevatedButton.styleFrom(

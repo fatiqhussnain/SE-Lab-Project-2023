@@ -63,7 +63,7 @@ class SqlHelper {
             );
             
             """"");
-    print("sdcard ${db.path}");
+    // print("sdcard ${db.path}");
   }
   static Future<Database> db() async {
     print('db is called   ');
@@ -76,8 +76,7 @@ class SqlHelper {
       },
     );
     Database d = await db;
-    createTables(d);
-    return db;
+    return d;
   }
 
   static Future<void> deleteMyDatabase() async {
