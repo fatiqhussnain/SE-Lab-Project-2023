@@ -1,4 +1,9 @@
+import 'package:finance_tracker/Screens/Expense.dart';
+import 'package:finance_tracker/Screens/Home.dart';
+import 'package:finance_tracker/Screens/Income.dart';
 import 'package:flutter/material.dart';
+import 'package:finance_tracker/CRUD/SqlHelper.dart';
+import '/AppColors.dart';
 
 class HomeNavigation extends StatefulWidget {
   const HomeNavigation({super.key});
@@ -9,6 +14,13 @@ class HomeNavigation extends StatefulWidget {
 
 
 class _HomeNavigationState extends State<HomeNavigation> {
+
+  @override
+  void initState() {
+    super.initState();
+    SqlHelper.deleteMyDatabase();
+    SqlHelper.db();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +39,14 @@ class _HomeNavigationState extends State<HomeNavigation> {
                 SizedBox(
                   height: height * 0.03,
                 ),
-                CircleAvatar(
-                  radius: height * 0.07,
-                  child: FlutterLogo(),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/profile');
+                  },
+                  child: CircleAvatar(
+                    radius: height * 0.07,
+                    child: FlutterLogo(),
+                  ),
                 ),
                 Text(
                   'User Name',
@@ -45,7 +62,7 @@ class _HomeNavigationState extends State<HomeNavigation> {
                 ListTile(
                   title: const Text('Currency Conversions'),
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/currencyConversion');
                   },
                 ),
                 // add a line break
@@ -58,31 +75,33 @@ class _HomeNavigationState extends State<HomeNavigation> {
                 ListTile(
                   title: const Text('Setting'),
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/setting');
                   },
                 ),
               ],
             ),
           ),
           appBar: AppBar(
-            title: const Row(
-              children: [
-                Text('Home Navigation'),
-              ],
-            ),
+            iconTheme: const IconThemeData(color: Colors.white),
+            backgroundColor: themeColor,
+            toolbarHeight: height * 0.08,
+            elevation: 9,
+            title: Text('CASHFLO', style: TextStyle(color: Colors.white),),
             bottom: const TabBar(
+              unselectedLabelColor: Colors.white54,
+              labelColor: Colors.white,
               tabs: [
-                Tab(text: 'Home'),
-                Tab(text: 'Settings'),
-                Tab(text: 'Profile'),
+                Tab(text: 'Income', height: 28,),
+                Tab(text: 'Home', height: 28,),
+                Tab(text: 'Expense', height: 28),
               ],
             ),
           ),
           body: const TabBarView(
             children: [
-              Center(child: Text('Home')),
-              Center(child: Text('Settings')),
-              Center(child: Text('Profile')),
+              Center(child: Income()),
+              Center(child: Home()),
+              Center(child: Expense()),
             ],
           ),
         ),
