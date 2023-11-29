@@ -25,6 +25,7 @@ class _ExpenseState extends State<Expense> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: backgroundColor(),
       body: Padding(
         padding: const EdgeInsets.all(22),
         child: Column(
@@ -37,8 +38,10 @@ class _ExpenseState extends State<Expense> {
               marginBottom: 10,
               width: 500,
               isReadOnly: false,
+              tColor: textColor(),
             ),
             MaterialTextField(
+              tColor: textColor(),
               isPassword: false,
               controller: c2,
               labelText: "Description",
@@ -53,7 +56,7 @@ class _ExpenseState extends State<Expense> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6),
                 border: Border.all(
-                  color: Colors.black87,
+                  color: textColor(),
                   width: 1,
                 ),
               ),
@@ -95,6 +98,7 @@ class _ExpenseState extends State<Expense> {
               labelText: "Amount",
               marginTop: 10,
               marginBottom: 20,
+              tColor: textColor(),
               width: 500,
               isReadOnly: false,
               isMultiline: false,
@@ -105,7 +109,7 @@ class _ExpenseState extends State<Expense> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6),
                 border: Border.all(
-                  color: Colors.black87,
+                  color: textColor(),
                   width: 1,
                 ),
               ),
@@ -130,9 +134,10 @@ class _ExpenseState extends State<Expense> {
                       padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
                       child: Text(
                           value,
-                          style: const TextStyle(
+                          style: TextStyle(
                               fontSize: 15,
-                              fontWeight: FontWeight.normal
+                              fontWeight: FontWeight.normal,
+                            color: textColor(),
                           )
                       ),
                     ),

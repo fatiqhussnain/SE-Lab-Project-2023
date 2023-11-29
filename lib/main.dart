@@ -1,20 +1,28 @@
+import 'package:finance_tracker/AppColors.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'Screens/Screens.dart';
 
-void main() {
+void main() async{
   sqfliteFfiInit();
   // Set the ffi database factory before opening the database
   databaseFactory = databaseFactoryFfi;
-  runApp(MyApp());
+
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  darkMode = prefs.getBool('darkMode') ?? false;
+  runApp(MyApp(cache: prefs));
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  final cache ;
+
+  MyApp({super.key, this.cache});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
@@ -26,9 +34,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       routes: {
-        '/': (context) => Authentication(title: 'Authentication'),
-        // if (firstTime()) '/': (context) => Authentication(title: 'Enter New Pin'),
-        // if (!firstTime()) '/': (context) => Authentication(title: 'Enter Your Pin'),
+        if (isfirstTime()) '/': (context) => Authentication(title: 'Enter New Pin'),
+        if (!isfirstTime()) '/': (context) => Authentication(title: 'Authentication'),
         '/homeNavigation': (context) => HomeNavigation(),
         '/currencyConversion': (context) => CurrencyConversion(),
         '/profile': (context) => Profile(),
@@ -37,8 +44,13 @@ class MyApp extends StatelessWidget {
       }
     );
   }
+
+  bool isfirstTime(){
+    if(cache.getDouble('balance')==null){
+      return true;
+    }
+    return false;
+  }
+
 }
 
-bool firstTime(){
-  return true;
-}

@@ -14,7 +14,7 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
-        backgroundColor: themeColor,
+        backgroundColor: themeColor(),
       ),
     );
   }

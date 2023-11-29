@@ -4,7 +4,7 @@ class TransactionBL{
   String label;
   String description;
   double amount ;
-  String type;
+  int type;
   String? createdAt;
   String? updatedAt;
   int active;
@@ -27,7 +27,7 @@ class TransactionBL{
     label: json["label"],
     description: json["description"],
     amount: json["amount"].toDouble(),
-    type: json["type"],
+    type: json["type"].toInt(),
     createdAt: json["createdAt"],
     updatedAt: json["updatedAt"],
     active: json["active"]

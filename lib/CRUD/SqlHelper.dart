@@ -1,8 +1,10 @@
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common/sqlite_api.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 class SqlHelper {
+
   static Future<void> createTables(Database db)async {
     print('çreateTables is called   ');
     db.execute("""
@@ -19,7 +21,7 @@ class SqlHelper {
             CREATE TABLE IF NOT EXISTS Reminders (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 label TEXT,
-                type TEXT,
+                type INTEGER,
                 time TEXT,
                 creatdAt TEXT, 
                 updatedAt TEXT,
@@ -82,6 +84,8 @@ class SqlHelper {
   static Future<void> deleteMyDatabase() async {
     print('deleteMyDatabase is called   ');
     await deleteDatabase('cashflo.db');
+    var cache = await SharedPreferences.getInstance();
+    cache.clear();
   }
 
 

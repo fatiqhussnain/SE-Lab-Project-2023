@@ -1,6 +1,10 @@
+import 'package:finance_tracker/CRUD/CRUD.dart';
 import 'package:flutter/foundation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '/AppColors.dart';
 import 'package:flutter/material.dart';
+
+import 'HomeNavigation.dart';
 
 var lst = [
   const Icon(Icons.edit_attributes, color: Colors.white54,),
@@ -18,51 +22,100 @@ int pin = 0;
 
 // int height = MediaQuery.
 
-void buttonPress(int n){
-  if(digits<6) {
-    lst[digits] = circle;
-    digits++;
-    pin = (pin * 10) + n;
-    if(digits==6){
-      // check pin
-      if (kDebugMode) {
-        print('pin : $pin');
-        print('hello');
-      }
-    }
-  }
 
-
-  print('digits: ${digits}');
-  print('pin : ${pin}');
-}
-void backspace(){
-  if (digits>0){
-    lst[digits-1] = slide;
-    digits--;
-    pin = pin~/10;
-  }
-
-  if (kDebugMode) {
-    print('digits: $digits');
-    print('pin : $pin');
-  }
-
-}
 
 
 class Authentication extends StatefulWidget {
   Authentication({super.key, required this.title});
   final String title;
   @override
-  State<Authentication> createState() => _AuthenticationState();
+  State<Authentication> createState() => _AuthenticationState(title);
 }
+
 class _AuthenticationState extends State<Authentication> {
+  late var cache;
+  Future<void> getCache() async {
+    cache = await SharedPreferences.getInstance();
+  }
+  _AuthenticationState(this.title);
+  final String title;
+
+  @override
+  void initState() {
+    super.initState();
+    getCache();
+  }
+
+  void buttonPress(int n, BuildContext context)async{
+    if(digits<6) {
+      lst[digits] = circle;
+      digits++;
+      pin = (pin * 10) + n;
+      if(digits==6){
+        if(title == "Authentication"){
+          if(pin == cache.getInt('pin')){
+            Navigator.pushReplacementNamed(context, '/homeNavigation');
+          }
+          else{
+            pin = 0;
+            digits = 0;
+            for(int i=0; i<6; i++){
+              lst[i] = slide;
+            }
+            showMessage(context, "Error", "Pin does not match");
+          }
+        }
+        else if(title == "Enter New Pin"){
+          cache.setInt('temp_pin', pin);
+          pin = 0;
+          digits = 0;
+          for(int i=0; i<6; i++){
+            lst[i] = slide;
+          }
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) =>
+                  Authentication(title: "Confirm Pin",))
+          );
+        }
+        else if(title == "Confirm Pin"){
+          if(pin == cache.getInt('temp_pin')){
+            cache.setInt('pin', pin);
+            cache.setDouble('balance', 0.0);
+            cache.setBool("darkMode", false);
+            SqlHelper.createTables(await SqlHelper.db());
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeNavigation(),));
+          }
+          else{
+            pin = 0;
+            digits = 0;
+            for(int i=0; i<6; i++){
+              lst[i] = slide;
+            }
+            showMessage(context, "Error", "Pin does not match");
+          }
+        }
+        else{
+          print('error');
+        }
+      }
+    }
+    print('digits: ${digits}');
+    print('pin : ${pin}');
+  }
+  void backspace(){
+    if (digits>0){
+      lst[digits-1] = slide;
+      digits--;
+      pin = pin~/10;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
       body: Container(
-        color: themeColor,
+        color: themeColor(),
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: Column(
@@ -127,7 +180,7 @@ class _AuthenticationState extends State<Authentication> {
                   TextButton(
                       onPressed: (){
                         setState(() {
-                          buttonPress(1);
+                          buttonPress(1, context);
                         });
                       },
                       child: const Text(
@@ -142,7 +195,7 @@ class _AuthenticationState extends State<Authentication> {
                   TextButton(
                     onPressed: () {
                       setState(() {
-                        buttonPress(2);
+                        buttonPress(2, context);
                       });
                     },
                     child: const Text(
@@ -157,7 +210,7 @@ class _AuthenticationState extends State<Authentication> {
                   TextButton(
                     onPressed: (){
                       setState(() {
-                        buttonPress(3);
+                        buttonPress(3, context);
                       });
                     },
                     child: const Text(
@@ -172,7 +225,7 @@ class _AuthenticationState extends State<Authentication> {
                   TextButton(
                     onPressed: (){
                       setState(() {
-                        buttonPress(4);
+                        buttonPress(4, context);
                       });
                     },
                     child: const Text(
@@ -187,7 +240,7 @@ class _AuthenticationState extends State<Authentication> {
                   TextButton(
                     onPressed: (){
                       setState(() {
-                        buttonPress(5);
+                        buttonPress(5, context);
                       });
                     },
                     child: const Text(
@@ -202,7 +255,7 @@ class _AuthenticationState extends State<Authentication> {
                   TextButton(
                     onPressed: (){
                       setState(() {
-                        buttonPress(6);
+                        buttonPress(6, context);
                       });
                     },
                     child: const Text(
@@ -217,7 +270,7 @@ class _AuthenticationState extends State<Authentication> {
                   TextButton(
                     onPressed: (){
                       setState(() {
-                        buttonPress(7);
+                        buttonPress(7, context);
                       });
                     },
                     child: const Text(
@@ -232,7 +285,7 @@ class _AuthenticationState extends State<Authentication> {
                   TextButton(
                     onPressed: (){
                       setState(() {
-                        buttonPress(8);
+                        buttonPress(8, context);
                       });
                     },
                     child: const Text(
@@ -247,7 +300,7 @@ class _AuthenticationState extends State<Authentication> {
                   TextButton(
                     onPressed: (){
                       setState(() {
-                        buttonPress(9);
+                        buttonPress(9, context);
                       });
                     },
                     child: const Text(
@@ -272,9 +325,8 @@ class _AuthenticationState extends State<Authentication> {
                   ),
                   TextButton(
                     onPressed: (){
-                      Navigator.pushReplacementNamed(context, '/homeNavigation');
                       setState(() {
-                        buttonPress(0);
+                        buttonPress(0, context);
                       });
                     },
                     child: const Text(
@@ -304,6 +356,26 @@ class _AuthenticationState extends State<Authentication> {
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> showMessage(BuildContext context, String head, String error)async {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(head),
+            content: Text(error),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("OK", style: TextStyle(color: themeColor()),),
+              ),
+            ],
+          );
+        }
     );
   }
 }

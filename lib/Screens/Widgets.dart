@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../AppColors.dart';
+
 class MaterialTextField extends StatefulWidget {
   final bool isPassword;
   final TextEditingController controller;
@@ -16,6 +18,7 @@ class MaterialTextField extends StatefulWidget {
   final String? errorText;
   final String? hintText;
   final bool? isMultiline;
+  final Color? tColor;
 
   const MaterialTextField(
       {super.key,
@@ -32,6 +35,7 @@ class MaterialTextField extends StatefulWidget {
         this.errorText,
         this.hintText,
         this.isMultiline,
+        this.tColor,
       });
 
   @override
@@ -70,7 +74,36 @@ class _MaterialTextFieldState extends State<MaterialTextField> {
                 hintText: widget.hintText,
                 errorText: widget.errorText,
                 labelText: widget.labelText,
-                border: const OutlineInputBorder(),
+                //change color of label text when selected
+                labelStyle: TextStyle(
+                  color: widget.tColor ?? Colors.black87,
+                ),
+                //change color of label text when not selected
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: widget.tColor ?? Colors.black87,
+                    width: 1,
+                  ),
+                ),
+                //change color of border
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: widget.tColor ?? Colors.black87,
+                    width: 1,
+                  ),
+                ),
+                disabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: widget.tColor ?? Colors.black87,
+                    width: 1,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: widget.tColor ?? Colors.black87,
+                    width: 1,
+                  ),
+                ),
                 suffixIcon: widget.isPassword
                     ? (_showPasswordSuffixIcon
                     ? IconButton(

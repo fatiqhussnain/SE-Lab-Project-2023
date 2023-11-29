@@ -14,7 +14,7 @@ class _CurrencyConversionState extends State<CurrencyConversion> {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
-        backgroundColor: themeColor,
+        backgroundColor: themeColor(),
         title: const Text('Currency Conversion', style: TextStyle(color: Colors.white),),
       ),
       body: Center(

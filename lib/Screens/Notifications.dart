@@ -9,7 +9,7 @@ class NotificationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: themeColor,
+        backgroundColor: themeColor(),
         foregroundColor: Colors.white,
         title: Text("Notifications"),
         centerTitle: true,

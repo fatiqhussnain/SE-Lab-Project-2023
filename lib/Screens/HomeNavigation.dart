@@ -31,6 +31,7 @@ class _HomeNavigationState extends State<HomeNavigation> {
         initialIndex: 1,
         child: Scaffold(
           drawer: Drawer(
+            backgroundColor: drawerColor(),
             width: width * 0.75,
             child: Column(
               children: [
@@ -47,7 +48,7 @@ class _HomeNavigationState extends State<HomeNavigation> {
 
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: themeColor,
+                        color: themeColor(),
                         width: 2,
                       ),
                     ),
@@ -63,29 +64,37 @@ class _HomeNavigationState extends State<HomeNavigation> {
                   'Muhammad Faraz Ali',
                   style: TextStyle(
                     fontSize: height * 0.02,
+                    color: textColor(),
                   ),
                 ),
                 const Divider(
-                  color: themeColor,
+                  color: Colors.teal,
                   height: 20,
                   thickness: 1.5,
                 ),
 
                 ListTile(
-                  title: const Text('Currency Conversions'),
+                  title: Text(
+                      'Currency Conversions',
+                      style: TextStyle(color: textColor())
+                  ),
                   onTap: () {
                     Navigator.pushNamed(context, '/currencyConversion');
                   },
                 ),
                 // add a line break
-                const Divider(
+                Divider(
                   height: 1,
                   thickness: 0.3,
                   indent: 12,
                   endIndent: 12,
+                  color: dividerColor(),
                 ),
                 ListTile(
-                  title: const Text('Setting'),
+                  title: Text(
+                      'Settings',
+                    style: TextStyle(color: textColor()),
+                  ),
                   onTap: () {
                     Navigator.pushNamed(context, '/setting');
                   },
@@ -95,7 +104,7 @@ class _HomeNavigationState extends State<HomeNavigation> {
           ),
           appBar: AppBar(
             iconTheme: const IconThemeData(color: Colors.white),
-            backgroundColor: themeColor,
+            backgroundColor: themeColor(),
             toolbarHeight: height * 0.08,
             elevation: 9,
             title: Row(
