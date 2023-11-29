@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
         '/currencyConversion': (context) => CurrencyConversion(),
         '/profile': (context) => Profile(),
         '/setting': (context) => Setting(),
+        '/notifications': (context) => NotificationScreen(),
       }
     );
   }

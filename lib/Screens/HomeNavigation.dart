@@ -18,6 +18,8 @@ class _HomeNavigationState extends State<HomeNavigation> {
   @override
   void initState() {
     super.initState();
+
+
     SqlHelper.deleteMyDatabase();
     SqlHelper.db();
   }
@@ -43,20 +45,34 @@ class _HomeNavigationState extends State<HomeNavigation> {
                   onTap: () {
                     Navigator.pushNamed(context, '/profile');
                   },
-                  child: CircleAvatar(
-                    radius: height * 0.07,
-                    child: FlutterLogo(),
+                  child: Container(
+
+                    decoration: BoxDecoration(
+
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: themeColor,
+                        width: 2,
+                      ),
+                    ),
+                    height: height * 0.15,
+                    child: ClipOval(
+                      child: Image.network(
+                          "https://media.licdn.com/dms/image/D4D03AQEXiNUbenr5DA/profile-displayphoto-shrink_200_200/0/1665739293673?e=2147483647&v=beta&t=IUnOsN5vcuM6Jrrnv8ZWLRu7l_xt_3zz9RVsjryxvAw",
+                      ),
+                    ),
                   ),
                 ),
                 Text(
-                  'User Name',
+                  'Muhammad Faraz Ali',
                   style: TextStyle(
                     fontSize: height * 0.02,
                   ),
                 ),
                 const Divider(
+                  color: themeColor,
                   height: 20,
-                  thickness: 0.5,
+                  thickness: 1.5,
                 ),
 
                 ListTile(
@@ -86,7 +102,18 @@ class _HomeNavigationState extends State<HomeNavigation> {
             backgroundColor: themeColor,
             toolbarHeight: height * 0.08,
             elevation: 9,
-            title: Text('CASHFLO', style: TextStyle(color: Colors.white),),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('CASHFLO', style: TextStyle(color: Colors.white),),
+                IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/notifications');
+                  },
+                  icon: const Icon(Icons.notifications),
+                ),
+              ],
+            ),
             bottom: const TabBar(
               unselectedLabelColor: Colors.white54,
               labelColor: Colors.white,

@@ -16,46 +16,57 @@ class _HomeState extends State<Home> {
     
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              height: height * 0.2,
-              width: width,
-              child: const Expanded(
-                child: Padding(
-                  padding: EdgeInsets.all(6.0),
-                  child: Card(
-                    color: themeColor,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Total Balance',
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children:
+            [
+              Container(
+                height: height * 0.2,
+                width: width,
+                child: Card(
+                  color: themeBlue,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Total Balance',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: thirteenthColor
+                        ),
+                      ),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Text(
+                          'Rs. 1200000',
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 40,
                             fontWeight: FontWeight.bold,
-                            color: thirteenthColor
+                            color: Colors.white
                           ),
                         ),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Text(
-                            'Rs. 120000000.00',
-                            style: TextStyle(
-                              fontSize: 40,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white
-                            ),
-                          ),
-                        )
-                      ],
-                    )
-                  ),
+                      )
+                    ],
+                  )
                 ),
               ),
-            )
-          ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: const Text(
+                    "Transactions",
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black87
+                    ),
+                ),
+              )
+            ]
+          ),
         ),
       ),
     );

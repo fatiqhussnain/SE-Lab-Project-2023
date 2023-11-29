@@ -1,4 +1,6 @@
 import 'package:sqflite/sqflite.dart';
+import 'package:sqflite_common/sqlite_api.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 class SqlHelper {
   static Future<void> createTables(Database db)async {
@@ -80,8 +82,7 @@ class SqlHelper {
 
   static Future<void> deleteMyDatabase() async {
     print('deleteMyDatabase is called   ');
-  //   delete the database cashflo.db
-  //   await deleteDatabase('cashflo.db');
+    await deleteDatabase('cashflo.db');
   }
 
 
